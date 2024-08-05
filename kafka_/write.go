@@ -11,9 +11,12 @@ var w *kafka.Writer
 
 func init() {
 	w = &kafka.Writer{
-		Addr:     kafka.TCP("localhost:9092"),
-		Topic:    "topic_a",
-		Balancer: &kafka.LeastBytes{},
+		Addr:         kafka.TCP("localhost:9092"),
+		Topic:        "topic_a",
+		Balancer:     &kafka.LeastBytes{},
+		RequiredAcks: kafka.RequireOne,
+		BatchSize:    2,
+		Async:        false,
 	}
 }
 
@@ -36,6 +39,7 @@ func WriteMsg2() {
 	if err != nil {
 		log.Fatal("failed to write messages:", err)
 	}
+
 	//if err := w.Close(); err != nil {
 	//	log.Fatal("failed to close writer:", err)
 	//}

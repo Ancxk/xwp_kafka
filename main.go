@@ -6,6 +6,19 @@ import (
 )
 
 func main() {
+	Ka()
+}
+
+type Tes struct {
+	Num  int    `json:"num,omitempty"`
+	Name string `json:"name,omitempty"`
+}
+
+func Te() {
+
+}
+
+func Ka() {
 	kafka_.CreateTopic()
 	for i := 0; i < 10; i++ {
 		go func() {
@@ -18,6 +31,5 @@ func main() {
 	for i := 0; i < 10; i++ {
 		go kafka_.ReadMsg()
 	}
-
 	time.Sleep(10 * time.Minute)
 }
